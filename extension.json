@@ -107,7 +107,7 @@ fi
 
 . $EXT_DIR/_init.sh
 
-cp template.json deploy.json
+cp $EXT_DIR/template.json deploy.json
 sed -i \"s/APPLICATION_ID/$APPLICATION_ID/g\" deploy.json
 sed -i \"s/APP_PROCESS_ID/$APP_PROCESS_ID/g\" deploy.json
 sed -i \"s/ENVIRONMENT_ID/$ENVIRONMENT_ID/g\" deploy.json
