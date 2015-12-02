@@ -107,7 +107,12 @@ fi
 
 . $EXT_DIR/_init.sh
 
-cp $EXT_DIR/template.json deploy.json
+if [ -z \"$DESCRIPTION\" ]; then
+    cp $EXT_DIR/template.json deploy.json
+else
+    cp $EXT_DIR/template_desc.json deploy.json
+    sed -i \"s/DESCRIPTION/$DESCRIPTION/g\" deploy.json
+fi
 sed -i \"s/APPLICATION_ID/$APPLICATION_ID/g\" deploy.json
 sed -i \"s/APP_PROCESS_ID/$APP_PROCESS_ID/g\" deploy.json
 sed -i \"s/ENVIRONMENT_ID/$ENVIRONMENT_ID/g\" deploy.json
