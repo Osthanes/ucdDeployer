@@ -1,0 +1,100 @@
+{
+    "id": "ibm.devops.services.pipeline.ucd.deployer",
+    "version": 2,
+    "name_key": "ExtName",
+    "desc_key": "ExtDesc",
+    "extension_type": "Deploy",
+    "message_key": "ExtMessage",
+    "inputs": [
+    ],
+    "params": [
+        {
+            "name": "UCD_URL",
+            "type": "Text",
+            "required": true,
+            "default_value": "",
+            "label_key": "UCD_URL_KEY",
+            "desc_key": "UCD_URL_DESC"
+        },
+        {
+            "name": "UCD_USER",
+            "type": "Text",
+            "required": true,
+            "default_value": "",
+            "label_key": "UCD_USER_KEY",
+            "desc_key": "UCD_USER_DESC"
+        },
+        {
+            "name": "UCD_PASSWORD",
+            "type": "Secure",
+            "required": true,
+            "default_value": "",
+            "label_key": "UCD_PASSWORD_KEY",
+            "desc_key": "UCD_PASSWORD_DESC"
+        },
+        {
+            "name": "APPLICATION_ID",
+            "type": "Text",
+            "required": true,
+            "default_value": "",
+            "label_key": "APPLICATION_ID_KEY",
+            "desc_key": "APPLICATION_ID_DESC"
+        },
+        {
+            "name": "PROCESS_ID",
+            "type": "Text",
+            "required": true,
+            "default_value": "",
+            "label_key": "PROCESS_ID_KEY",
+            "desc_key": "PROCESS_ID_DESC"
+        },
+        {
+            "name": "DESCRIPTION",
+            "type": "Text",
+            "required": false,
+            "default_value": "Deployment from the IDS Pipeline",
+            "label_key": "DESCRIPTION_KEY",
+            "desc_key": "DESCRIPTION_DESC"
+        },
+        {
+            "name": "ENVIRONMENT_ID",
+            "type": "Text",
+            "required": true,
+            "default_value": "",
+            "label_key": "ENVIRONMENT_ID_KEY",
+            "desc_key": "ENVIRONMENT_ID_DESC"
+        },
+        {
+            "name": "COMPONENT_ID",
+            "type": "Text",
+            "required": true,
+            "default_value": "",
+            "label_key": "COMPONENT_ID_KEY",
+            "desc_key": "COMPONENT_ID_DESC"
+        },
+        {
+            "name": "VERSION",
+            "type": "Text",
+            "required": false,
+            "default_value": "",
+            "label_key": "VERSION_KEY",
+            "desc_key": "VERSION_DESC"
+        }
+    ],
+    "outputs": [
+        {
+            "type": "Artifacts",
+            "inclusion" : "always"
+        }
+    ],
+    "execution": {
+        "type": "JenkinsDocker",
+        "shell": "#!/bin/bash
+set +x
+set +e
+/bin/bash -e #COMMAND#"
+    }
+    },
+    "project": "https://hub.jazz.net/project/alchemy/Alchemy-Ostanes",
+    "project_contact": "jgarcows@us.ibm.com"
+}
