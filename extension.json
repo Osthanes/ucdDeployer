@@ -1,6 +1,6 @@
 {
     "id": "ibm.devops.services.pipeline.ucd.deployer",
-    "version": 2,
+    "version": 1,
     "name_key": "ExtName",
     "desc_key": "ExtDesc",
     "extension_type": "Deploy",
@@ -41,12 +41,12 @@
             "desc_key": "APPLICATION_ID_DESC"
         },
         {
-            "name": "PROCESS_ID",
+            "name": "APP_PROCESS_ID",
             "type": "Text",
             "required": true,
             "default_value": "",
-            "label_key": "PROCESS_ID_KEY",
-            "desc_key": "PROCESS_ID_DESC"
+            "label_key": "APP_PROCESS_ID_KEY",
+            "desc_key": "APP_PROCESS_ID_DESC"
         },
         {
             "name": "DESCRIPTION",
@@ -92,7 +92,30 @@
         "shell": "#!/bin/bash
 set +x
 set +e
-/bin/bash -e #COMMAND#"
+UCD_URL=\"#UCD_URL#\"
+UCD_USER=\"#UCD_USER#\"
+UCD_PASSWORD=\"#UCD_PASSWORD#\"
+APPLICATION_ID=\"#APPLICATION_ID#\"
+APP_PROCESS_ID=\"#APP_PROCESS_ID#\"
+DESCRIPTION=\"#DESCRIPTION#\"
+ENVIRONMENT_ID=\"#ENVIRONMENT_ID#\"
+COMPONENT_ID=\"#COMPONENT_ID#\"
+VERSION=\"#VERSION#\"
+if [ -z \"$VERSION\" ]; then
+    VERSION=\"latest\"
+fi
+
+. $EXT_DIR/_init.sh
+
+cp template.json deploy.json
+sed -i \"s/APPLICATION_ID/$APPLICATION_ID/g\" deploy.json
+sed -i \"s/APP_PROCESS_ID/$APP_PROCESS_ID/g\" deploy.json
+sed -i \"s/ENVIRONMENT_ID/$ENVIRONMENT_ID/g\" deploy.json
+sed -i \"s/COMPONENT_ID/$COMPONENT_ID/g\" deploy.json
+sed -i \"s/VERSION/$VERSION/g\" deploy.json
+
+udclient/udclient -v -username \"$UCD_USER\" -password \"$UCD_PASSWORD\" -weburl \"$UCD_URL\"  requestApplicationProcess deploy.json
+"
     }
     },
     "project": "https://hub.jazz.net/project/alchemy/Alchemy-Ostanes",

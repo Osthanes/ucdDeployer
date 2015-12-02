@@ -1,0 +1,9 @@
+{
+"application": "APPLICATION_ID",
+"applicationProcess": "APP_PROCESS_ID",
+"environment": "ENVIRONMENT_ID",
+"versions": [
+  {"component": "COMPONENT_ID",
+   "version": "VERSION" 
+  }]
+}
