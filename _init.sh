@@ -31,9 +31,8 @@ debugme() {
   [[ $DEBUG = 1 ]] && "$@" || :
 }
 
-sudo apt-get update
-sudo apt-get -y install openjdk-7-jdk unzip curl
-export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/
+sudo apt-get update &> /dev/null
+sudo apt-get -y install curl &> /dev/null
 
 set +e
 set +x 
@@ -47,8 +46,3 @@ else
     export EXT_DIR=`pwd`
 fi 
 
-###############################
-# Download and setup UCD CLI  #
-###############################
-curl -v -o udclient.zip "$UCD_URL/tools/udclient.zip"
-unzip udclient.zip
