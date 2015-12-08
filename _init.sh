@@ -46,3 +46,35 @@ else
     export EXT_DIR=`pwd`
 fi 
 
+#################################################################
+# Identify the COMPONENT_ID and VERSION to use from IMAGE built #
+#################################################################
+# If the COMPONENT_ID is set in the environment then use that.  
+# Else assume the input is coming from the build.properties created and archived by the Docker builder job
+debugme echo "finding build.properties"
+debugme pwd 
+debugme ls
+
+if [ -f build.properties ]; then
+    . build.properties 
+    debugme cat build.properties
+fi
+SHORT_NAME=`echo ${IMAGE_NAME#*/}`
+if [ -z $COMPONENT_ID ]; then
+    export COMPONENT_ID=`echo ${SHORT_NAME} | awk -F ':' '{print $1}'`
+fi
+if [ -z $VERSION ]; then
+    export VERSION=`echo ${SHORT_NAME} | awk -F ':' '{print $2}'`
+fi
+
+if [ -z $COMPONENT_ID ]; then
+    echo -e "${red}Set the COMPONENT_ID in the environment or provide a Docker build job as input to this deploy job.${no_color}"
+    echo -e "${red}If there was a recent change to the pipeline, such as deleting or moving a job or stage, check that the input to this and other later stages is still set to the correct build stage and job.${no_color}"
+    exit 1
+fi
+echo "COMPONENT_ID: $COMPONENT_ID"
+if [ -z $VERSION ]; then
+    export VERSION="latest"
+fi
+echo "VERSION: $VERSION"
+

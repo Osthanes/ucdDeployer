@@ -6,6 +6,10 @@
     "extension_type": "Deploy",
     "message_key": "ExtMessage",
     "inputs": [
+        {
+            "type": "Artifacts",
+            "inclusion" : "always"
+        }
     ],
     "params": [
         {
@@ -63,22 +67,6 @@
             "default_value": "",
             "label_key": "ENVIRONMENT_ID_KEY",
             "desc_key": "ENVIRONMENT_ID_DESC"
-        },
-        {
-            "name": "COMPONENT_ID",
-            "type": "Text",
-            "required": true,
-            "default_value": "",
-            "label_key": "COMPONENT_ID_KEY",
-            "desc_key": "COMPONENT_ID_DESC"
-        },
-        {
-            "name": "VERSION",
-            "type": "Text",
-            "required": false,
-            "default_value": "",
-            "label_key": "VERSION_KEY",
-            "desc_key": "VERSION_DESC"
         }
     ],
     "outputs": [
@@ -99,11 +87,6 @@ APPLICATION_ID=\"#APPLICATION_ID#\"
 APP_PROCESS_ID=\"#APP_PROCESS_ID#\"
 DESCRIPTION=\"#DESCRIPTION#\"
 ENVIRONMENT_ID=\"#ENVIRONMENT_ID#\"
-COMPONENT_ID=\"#COMPONENT_ID#\"
-VERSION=\"#VERSION#\"
-if [ -z \"$VERSION\" ]; then
-    VERSION=\"latest\"
-fi
 
 . $EXT_DIR/_init.sh
 
