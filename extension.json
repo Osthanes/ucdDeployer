@@ -102,8 +102,10 @@ sed -i \"s/ENVIRONMENT_ID/$ENVIRONMENT_ID/g\" deploy.json
 sed -i \"s,COMPONENT_ID,$COMPONENT_ID,g\" deploy.json
 sed -i \"s/VERSION/$VERSION/g\" deploy.json
 
+echo
+curl -v -k -u \"${UCD_USER}:${UCD_PASSWORD}\" \"$UCD_URL/cli/applicationProcessRequest/request\" -X PUT -d @deploy.json
 
-curl -k -u \"${UCD_USER}:${UCD_PASSWORD}\" \"$UCD_URL/cli/applicationProcessRequest/request\" -X PUT -d @deploy.json
+echo \"Return value of $?\"
 
 "
     }
