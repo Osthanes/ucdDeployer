@@ -99,7 +99,7 @@ fi
 sed -i \"s/APPLICATION_ID/$APPLICATION_ID/g\" deploy.json
 sed -i \"s/APP_PROCESS_ID/$APP_PROCESS_ID/g\" deploy.json
 sed -i \"s/ENVIRONMENT_ID/$ENVIRONMENT_ID/g\" deploy.json
-sed -i \"s/COMPONENT_ID/$COMPONENT_ID/g\" deploy.json
+sed -i \"s,COMPONENT_ID,$COMPONENT_ID,g\" deploy.json
 sed -i \"s/VERSION/$VERSION/g\" deploy.json
 
 
