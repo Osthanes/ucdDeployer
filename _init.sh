@@ -54,15 +54,20 @@ fi
 source ${EXT_DIR}/git_util.sh
 
 ################################
-# git the go sourc code        #
+# git the go source code       #
 ################################
 pushd . >/dev/null
+export GO_PATH=`pwd`
 mkdir -p src/github.com/Osthanes
 cd src/github.com/Osthanes
 git_retry clone https://github.com/Osthanes/goUcdDeployer.git goUcdDeployer
 popd >/dev/null
 
 
+################################
+# build the go  code           #
+################################
+go install github.com/Osthanes/goUcdDeployer
 
 #################################################################
 # Identify the COMPONENT_ID and VERSION to use from IMAGE built #

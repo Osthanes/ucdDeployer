@@ -90,24 +90,11 @@ ENVIRONMENT_ID=\"#ENVIRONMENT_ID#\"
 
 . $EXT_DIR/_init.sh
 
-if [ -z \"$DESCRIPTION\" ]; then
-    cp $EXT_DIR/template.json deploy.json
-else
-    cp $EXT_DIR/template_desc.json deploy.json
-    sed -i \"s/DESCRIPTION/$DESCRIPTION/g\" deploy.json
-fi
-sed -i \"s/APPLICATION_ID/$APPLICATION_ID/g\" deploy.json
-sed -i \"s/APP_PROCESS_ID/$APP_PROCESS_ID/g\" deploy.json
-sed -i \"s/ENVIRONMENT_ID/$ENVIRONMENT_ID/g\" deploy.json
-sed -i \"s,COMPONENT_ID,$COMPONENT_ID,g\" deploy.json
-sed -i \"s/VERSION/$VERSION/g\" deploy.json
-
-echo
-curl -w '\n%{http_code}\n' -k -u \"${UCD_USER}:${UCD_PASSWORD}\" \"$UCD_URL/cli/applicationProcessRequest/request\" -X PUT -d @deploy.json
-
-echo \"Return value of $?\"
-
-"
+bin/goUcdDeployer
+local RC=$?
+if [ $RC -ne 0 ]; then
+    exit $RC
+fi"
     }
     },
     "project": "https://hub.jazz.net/project/alchemy/Alchemy-Ostanes",
