@@ -26,13 +26,15 @@ export no_color='\e[0m' # No Color
 
 ##################################################
 # Simple function to only run command if DEBUG=1 # 
-### ###############################################
+##################################################
 debugme() {
   [[ $DEBUG = 1 ]] && "$@" || :
 }
 
 sudo apt-get update &> /dev/null
-sudo apt-get -y install curl &> /dev/null
+sudo apt-get -y install curl golang &> /dev/null
+
+
 
 set +e
 set +x 
@@ -45,6 +47,22 @@ if [ -n $EXT_DIR ]; then
 else
     export EXT_DIR=`pwd`
 fi 
+
+#################################
+# Source git_util file          #
+#################################
+source ${EXT_DIR}/git_util.sh
+
+################################
+# git the go sourc code        #
+################################
+pushd . >/dev/null
+mkdir -p src/github.com/Osthanes
+cd src/github.com/Osthanes
+git_retry clone https://github.com/Osthanes/goUcdDeployer.git goUcdDeployer
+popd >/dev/null
+
+
 
 #################################################################
 # Identify the COMPONENT_ID and VERSION to use from IMAGE built #
