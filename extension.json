@@ -91,9 +91,9 @@ ENVIRONMENT_ID=\"#ENVIRONMENT_ID#\"
 . $EXT_DIR/_init.sh
 
 bin/goUcdDeployer
-local RC=$?
-if [ $RC -ne 0 ]; then
-    exit $RC
+_DEPLOY_RC=$?
+if [ \"$_DEPLOY_RC\" -ne 0 ]; then
+    exit $_DEPLOY_RC
 fi"
     }
     },

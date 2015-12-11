@@ -57,7 +57,7 @@ source ${EXT_DIR}/git_util.sh
 # git the go source code       #
 ################################
 pushd . >/dev/null
-export GO_PATH=`pwd`
+export GOPATH=`pwd`
 mkdir -p src/github.com/Osthanes
 cd src/github.com/Osthanes
 git_retry clone https://github.com/Osthanes/goUcdDeployer.git goUcdDeployer
